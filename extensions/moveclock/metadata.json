@@ -1,0 +1,9 @@
+{
+"uuid": "moveclock@gnome-shell-extensions.gnome.org",
+"name": "MoveClock",
+"description": "Move the position of clock",
+"original-author": "zodiac_es@yahoo.es",
+"shell-version": [ "3.0.2" ],
+"localedir": "/usr/share/locale",
+"url": "http://git.gnome.org/gnome-shell-extensions"
+}
