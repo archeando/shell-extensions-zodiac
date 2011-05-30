@@ -91,7 +91,7 @@ CFLAGS = -g -O2
 CPPFLAGS = 
 CYGPATH_W = echo
 DATADIRNAME = share
-DEFS = -DPACKAGE_NAME=\"gnome-shell-extensions\" -DPACKAGE_TARNAME=\"gnome-shell-extensions\" -DPACKAGE_VERSION=\"3.0.2\" -DPACKAGE_STRING=\"gnome-shell-extensions\ 3.0.2\" -DPACKAGE_BUGREPORT=\"https://bugzilla.gnome.org/enter_bug.cgi\?product=gnome-shell\&component=extensions\" -DPACKAGE_URL=\"\" -DPACKAGE=\"gnome-shell-extensions\" -DVERSION=\"3.0.2\" -DGETTEXT_PACKAGE=\"gnome-shell-extensions\"
+DEFS = -DPACKAGE_NAME=\"gnome-shell-extensions\" -DPACKAGE_TARNAME=\"gnome-shell-extensions\" -DPACKAGE_VERSION=\"3.0.2\" -DPACKAGE_STRING=\"gnome-shell-extensions\ 3.0.2\" -DPACKAGE_BUGREPORT=\"https://github.com/zodiac66/shell-extensions-zodiac\" -DPACKAGE_URL=\"\" -DPACKAGE=\"gnome-shell-extensions\" -DVERSION=\"3.0.2\" -DGETTEXT_PACKAGE=\"gnome-shell-extensions\"
 DEPDIR = .deps
 ECHO_C = 
 ECHO_N = -n
@@ -125,7 +125,7 @@ MSGFMT = /usr/bin/msgfmt
 MSGMERGE = /usr/bin/msgmerge
 OBJEXT = o
 PACKAGE = gnome-shell-extensions
-PACKAGE_BUGREPORT = https://bugzilla.gnome.org/enter_bug.cgi?product=gnome-shell&component=extensions
+PACKAGE_BUGREPORT = https://github.com/zodiac66/shell-extensions-zodiac
 PACKAGE_NAME = gnome-shell-extensions
 PACKAGE_STRING = gnome-shell-extensions 3.0.2
 PACKAGE_TARNAME = gnome-shell-extensions

@@ -1,0 +1,8 @@
+{
+   "uuid": "move-activities@gnome-shell-extensions.gnome.org",
+   "name": "Activities Button",
+   "description": "Change look of Activities button area",
+   "original-authors": "Finnbarr P. Murphy, Miguel Aguilar",
+   "shell-version": [ "3.0.2" ],
+   "url": "http://git.gnome.org/gnome-shell-extensions"
+}
