@@ -431,7 +431,7 @@ $config_files
 Configuration commands:
 $config_commands
 
-Report bugs to <https://bugzilla.gnome.org/enter_bug.cgi?product=gnome-shell&component=extensions>."
+Report bugs to <https://github.com/zodiac66/shell-extensions-zodiac>."
 
 ac_cs_config="'--prefix=/usr' '--disable-schemas-compile' '--enable-extensions=move-activities' 'PKG_CONFIG_PATH=:/opt/qt/lib/pkgconfig'"
 ac_cs_version="\
@@ -782,8 +782,8 @@ S["ECHO_T"]=""
 S["ECHO_N"]="-n"
 S["ECHO_C"]=""
 S["DEFS"]="-DPACKAGE_NAME=\\\"gnome-shell-extensions\\\" -DPACKAGE_TARNAME=\\\"gnome-shell-extensions\\\" -DPACKAGE_VERSION=\\\"3.0.2\\\" -DPACKAGE_STRING=\\\"gnome-shell-ex"\
-"tensions\\ 3.0.2\\\" -DPACKAGE_BUGREPORT=\\\"https://bugzilla.gnome.org/enter_bug.cgi\\?product=gnome-shell\\&component=extensions\\\" -DPACKAGE_URL=\\\"\\\" -DP"\
-"ACKAGE=\\\"gnome-shell-extensions\\\" -DVERSION=\\\"3.0.2\\\" -DGETTEXT_PACKAGE=\\\"gnome-shell-extensions\\\""
+"tensions\\ 3.0.2\\\" -DPACKAGE_BUGREPORT=\\\"https://github.com/zodiac66/shell-extensions-zodiac\\\" -DPACKAGE_URL=\\\"\\\" -DPACKAGE=\\\"gnome-shell-extensions\\"\
+"\" -DVERSION=\\\"3.0.2\\\" -DGETTEXT_PACKAGE=\\\"gnome-shell-extensions\\\""
 S["mandir"]="${datarootdir}/man"
 S["localedir"]="${datarootdir}/locale"
 S["libdir"]="${exec_prefix}/lib"
@@ -807,7 +807,7 @@ S["program_transform_name"]="s,x,x,"
 S["prefix"]="/usr"
 S["exec_prefix"]="${prefix}"
 S["PACKAGE_URL"]=""
-S["PACKAGE_BUGREPORT"]="https://bugzilla.gnome.org/enter_bug.cgi?product=gnome-shell&component=extensions"
+S["PACKAGE_BUGREPORT"]="https://github.com/zodiac66/shell-extensions-zodiac"
 S["PACKAGE_STRING"]="gnome-shell-extensions 3.0.2"
 S["PACKAGE_VERSION"]="3.0.2"
 S["PACKAGE_TARNAME"]="gnome-shell-extensions"

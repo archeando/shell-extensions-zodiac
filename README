@@ -1,6 +1,21 @@
-Fork of the gnome-shell-extensions, and others, with configuration 
-options added by schemes 
+GNOME Shell Extensions is a collection of extensions providing additional
+and optional functionality to GNOME Shell.
+Since GNOME Shell is not API stable, extensions work only against a very
+specific version of the shell, usually the same as this package (see
+"configure --version"). Also, since extensions are built from many
+individual contributors, we cannot guarantee stability or quality for any
+specific extension.
+For these reasons, distributions are advised to avoid installing or packaging
+this module by defaul.
 
+For more information about GNOME Shell Extensions
+ http://live.gnome.org/GnomeShell/Extensions
+
+For general information about GNOME Shell
+ http://live.gnome.org/GnomeShell
+
+Bugs should be reported at http://bugzilla.gnome.org against the 'gnome-shell'
+product, with the 'extensions' component.
 
 Extensions
 ==========
@@ -63,10 +78,6 @@ xrandr-indicator
   Replace the GTK+ based indicator from gnome-settings-daemon with
 a native one. Lets the user rotate the laptop monitor and open
 display preferences quickly.
-
-moveclock
-
-  Move the position of clock. Possibilities: left, right, center or hide.
 
 License
 =======
