@@ -103,5 +103,5 @@ function main(metadata) {
 //    Main.panel._rightBox.remove_actor(statusMenu.actor);
     statusMenu.menu.removeAll();
     createSubMenu.call(statusMenu);
- //   Main.panel._leftBox.insert_actor(statusMenu.actor, 0);
+ //   Main.panel._leftBox.add_actor(statusMenu.actor, 0);
 }
