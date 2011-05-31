@@ -30,9 +30,8 @@ function main() {
 
    // change the text string if you want to display different text
    // for the activities button
-   let label = new St.Label({ text: _("Activities"),
-                              style_class: 'activities_text' });
-
+   let label = new St.Label({ text: _("Activities")});
+                             
    // change the icon_name if you want to display a different icon
    // the icon must exist in the appropriate directory. For fedora, 'fedora-logo-icon'
    let logo = new St.Icon({ icon_type: St.IconType.FULLCOLOR, 
