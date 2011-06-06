@@ -1,0 +1,145 @@
+# Vietnamese translation for gnome-shell-extensions.
+# Copyright (C) 2011 gnome-shell-extensions's COPYRIGHT HOLDER
+# This file is distributed under the same license as the gnome-shell-extensions package.
+# Nguyễn Thái Ngọc Duy <pclouds@gmail.com>, 2011.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: gnome-shell-extensions master\n"
+"Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-"
+"shell&keywords=I18N+L10N&component=extensions\n"
+"POT-Creation-Date: 2011-04-16 16:32+0000\n"
+"PO-Revision-Date: 2011-03-27 17:37+0700\n"
+"Last-Translator: Nguyễn Thái Ngọc Duy <pclouds@gmail.com>\n"
+"Language-Team: Vietnamese <gnomevi-list@lists.sourceforge.net>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+
+#: ../extensions/alternative-status-menu/extension.js:23
+#: ../extensions/alternative-status-menu/extension.js:27
+#: ../extensions/alternative-status-menu/extension.js:93
+msgid "Hibernate"
+msgstr ""
+
+#: ../extensions/alternative-status-menu/extension.js:26
+#: ../extensions/alternative-status-menu/extension.js:92
+msgid "Suspend"
+msgstr ""
+
+#: ../extensions/alternative-status-menu/extension.js:52
+msgid "Available"
+msgstr ""
+
+#: ../extensions/alternative-status-menu/extension.js:57
+msgid "Busy"
+msgstr ""
+
+#: ../extensions/alternative-status-menu/extension.js:65
+msgid "My Account"
+msgstr ""
+
+#: ../extensions/alternative-status-menu/extension.js:69
+msgid "System Settings"
+msgstr ""
+
+#: ../extensions/alternative-status-menu/extension.js:76
+msgid "Lock Screen"
+msgstr ""
+
+#: ../extensions/alternative-status-menu/extension.js:80
+msgid "Switch User"
+msgstr ""
+
+#: ../extensions/alternative-status-menu/extension.js:85
+msgid "Log Out..."
+msgstr ""
+
+#: ../extensions/alternative-status-menu/extension.js:100
+msgid "Power Off..."
+msgstr ""
+
+#: ../extensions/auto-move-windows/org.gnome.shell.extensions.auto-move-windows.gschema.xml.in.h:1
+msgid ""
+"A list of strings, each containing an application id (desktop file name), "
+"followed by a colon and the workspace number"
+msgstr ""
+"Danh sách chuỗi các id ứng dụng (tên tập tin .desktop), theo sau là dấu hai "
+"chấm và mã số vùng làm việc"
+
+#: ../extensions/auto-move-windows/org.gnome.shell.extensions.auto-move-windows.gschema.xml.in.h:2
+msgid "Application and workspace list"
+msgstr "Danh sách ứng dụng và vùng làm việc"
+
+#: ../extensions/dock/extension.js:116
+msgid "Drag here to add favorites"
+msgstr "Thả vào đây để thêm ưa thích"
+
+#: ../extensions/dock/extension.js:417
+msgid "New Window"
+msgstr "Cửa sổ mới"
+
+#: ../extensions/dock/extension.js:419
+msgid "Quit Application"
+msgstr "Thoát ứng dụng"
+
+#: ../extensions/dock/extension.js:424
+msgid "Remove from Favorites"
+msgstr "Hết ưa thích"
+
+#: ../extensions/dock/extension.js:425
+msgid "Add to Favorites"
+msgstr "Đánh dấu ưa thích"
+
+#: ../extensions/example/extension.js:11
+msgid "Hello, world!"
+msgstr "Xin chào!"
+
+#: ../extensions/gajim/extension.js:219
+#, c-format
+msgid "%s is away."
+msgstr "%s không có mặt."
+
+#: ../extensions/gajim/extension.js:222
+#, c-format
+msgid "%s is offline."
+msgstr "%s đang ngoại tuyến."
+
+#: ../extensions/gajim/extension.js:225
+#, c-format
+msgid "%s is online."
+msgstr "%s đang trực tuyến."
+
+#: ../extensions/gajim/extension.js:228
+#, c-format
+msgid "%s is busy."
+msgstr "%s đang bận."
+
+#: ../extensions/user-theme/org.gnome.shell.extensions.user-theme.gschema.xml.in.h:1
+msgid "The name of the theme, to be loaded from ~/.themes/name/gnome-shell"
+msgstr "Tên chủ đề, nạp từ ~/.themes/name/gnome-shell"
+
+#: ../extensions/user-theme/org.gnome.shell.extensions.user-theme.gschema.xml.in.h:2
+msgid "Theme name"
+msgstr "Tên chủ đề"
+
+#: ../extensions/xrandr-indicator/extension.js:26
+msgid "Normal"
+msgstr "Bình thường"
+
+#: ../extensions/xrandr-indicator/extension.js:27
+msgid "Left"
+msgstr "Trái"
+
+#: ../extensions/xrandr-indicator/extension.js:28
+msgid "Right"
+msgstr "Phải"
+
+#: ../extensions/xrandr-indicator/extension.js:29
+msgid "Upside-down"
+msgstr "Trên xuống"
+
+#: ../extensions/xrandr-indicator/extension.js:78
+msgid "Configure display settings..."
+msgstr "Cấu hình thiết lập hiển thị..."

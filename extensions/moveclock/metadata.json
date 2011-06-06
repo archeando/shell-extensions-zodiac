@@ -1,0 +1,9 @@
+{
+"uuid": "moveclock@zodiac-shell-extensions",
+"name": "MoveClock",
+"description": "Move the position of clock",
+"original-author":[ "zodiac_es@yahoo.es" ],
+"shell-version": [ "3.0.2" ],
+"localedir": "/usr/share/locale",
+"url": "https://github.com/zodiac66/shell-extensions-zodiac"
+}

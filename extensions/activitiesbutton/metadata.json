@@ -1,0 +1,8 @@
+{
+   "uuid": "activitiesbutton@zodiac-shell-extensions",
+   "name": "Activities Button",
+   "description": "Change look of Activities button area",
+   "original-authors": [ "Miguel Aguilar" ],
+   "shell-version": [ "3.0.2" ],
+   "url": "https://github.com/zodiac66/shell-extensions-zodiac"
+}
