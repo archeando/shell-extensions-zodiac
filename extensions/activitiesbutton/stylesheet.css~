@@ -1,8 +1,0 @@
-.activities_box {
-   spacing: 8px;
-}
-
-.activities_text {
-   font-size: 18px;
-   font-weight: bold;
-}
