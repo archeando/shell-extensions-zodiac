@@ -22,7 +22,7 @@ dnl keep this in alphabetic order
 dnl by default, install only extensions that do not change completely the shell experience,
 dnl that don't require GSettings and that don't require external packages for typelibs
 dnl (so basically only menus, status icons, search providers, overview tabs, message tray sources, etc.)
-DEFAULT_EXTENSIONS="moveclock activitiesbutton autohidetopbar"
+DEFAULT_EXTENSIONS="activitiesbutton autohidetopbar noa11y moveclock"
 ALL_EXTENSIONS="$DEFAULT_EXTENSIONS"
 AC_SUBST(ALL_EXTENSIONS, [$ALL_EXTENSIONS])
 AC_ARG_ENABLE([extensions],
@@ -44,6 +44,7 @@ AC_CONFIG_FILES([
   extensions/moveclock/Makefile
   extensions/activitiesbutton/Makefile
   extensions/autohidetopbar/Makefile
+  extensions/noa11y/Makefile
   extensions/Makefile
   Makefile
   po/Makefile.in
