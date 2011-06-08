@@ -1,0 +1,9 @@
+{ 
+"uuid": "@uuid@",
+"name": "AutoHidePanel",
+"description": "Autohide panel",
+"original-author":[ "Finnbarr P. Murphy", "zodiac_es@yahoo.es" ],
+"shell-version": [ "@shell_current@" ],
+"localedir": "@LOCALEDIR@",
+"url": "@url@"
+}

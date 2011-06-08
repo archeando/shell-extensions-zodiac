@@ -1,0 +1,9 @@
+{ 
+   "shell-version": ["3.0"], 
+   "uuid": "autohidetopbar@fpmurphy.com",
+   "name": "autohidetopbar",
+   "description": "Auto hide the top bar",
+   "url": "http://fpmurphy.com/gnome-shell-extensions",
+   "original-authors": "Finnbarr P. Murphy",
+   "locale": "locale"
+}
