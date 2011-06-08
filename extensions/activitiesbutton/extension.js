@@ -50,7 +50,7 @@ function main() {
         let x=children.length-1;
 	while (i < children.length) {
           if ( children[i].name == 'panelActivities' ){
-            Main.panel._leftBox.remove_actor(children[i]);
+//            Main.panel._leftBox.remove_actor(children[i]);
             x=i;
 	    i=children.length;
 	  }
@@ -63,6 +63,10 @@ function main() {
             case PositionMode.RIGHT:
 		Main.panel._rightBox.add (children[x]); 
                break;
+	    case PositionMode.HIDE:
+		children[x].hide();
+		break;
 	}
+
     
 }
