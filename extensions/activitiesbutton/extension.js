@@ -61,6 +61,9 @@ function main() {
                 Main.panel._leftBox.insert_actor(children[x],0);
                 break;
             case PositionMode.RIGHT:
+		Main.panel._rightBox.remove_actor (Main.panel._statusmenu.actor);
+		Main.panel._leftBox.insert_actor (Main.panel._statusmenu.actor,0);
+		Main.panel._leftBox.remove_actor (children[x]);
 		Main.panel._rightBox.add (children[x]); 
                break;
 	    case PositionMode.HIDE:

@@ -13,7 +13,7 @@ const PanelMenu = imports.ui.panelMenu;
 const Main = imports.ui.main;
 const Tweener = imports.ui.tweener;
 
-const PANEL_HEIGHT = 25;
+const PANEL_HEIGHT = 31;
 const AUTOHIDE_ANIMATION_TIME = 0.4;
 const TIME_DELTA = 1500;
 
