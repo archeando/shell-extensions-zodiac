@@ -13,8 +13,7 @@ const MOVE_ACTIVITIES_POSITION_KEY = 'position';
 const PositionMode = {
     LEFT: 0,
     RIGHT: 1,
-    CENTER: 2,
-    HIDE: 3
+    HIDE: 2
 };
 
 let position = PositionMode.LEFT;
