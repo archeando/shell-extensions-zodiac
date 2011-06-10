@@ -1,5 +1,5 @@
 Zodiac Shell Extensions is a collection of extensions providing additional
-and optional functionality to GNOME Shell.
+and optional functionality to GNOME Shell (based on extensions of fpmurphy). 
 
 Extensions
 ==========
@@ -22,7 +22,7 @@ Turn off the ally icon in the panel
 Install
 =======
 
- ./autogen.sh --prefix=/usr --disable-schemas-compile --enable-extensions="moveclock activitiesbutton autohidetopbar"
+ ./autogen.sh --prefix=/usr --disable-schemas-compile --enable-extensions="activitiesbutton autohidetopbar moveclock  noa11y"
 
 make && sudo make install
 
