@@ -11,6 +11,10 @@ Move clock in panel
 
 Change look of Activities button area
 
+* autohidedock
+
+A dock autohide for the GNOME Shell
+
 * autohidetopbar
 
 Autohide top panel
@@ -22,7 +26,7 @@ Turn off the ally icon in the panel
 Install
 =======
 
- ./autogen.sh --prefix=/usr --disable-schemas-compile --enable-extensions="activitiesbutton autohidetopbar moveclock  noa11y"
+ ./autogen.sh --prefix=/usr --disable-schemas-compile --enable-extensions="activitiesbutton autohidedock autohidetopbar moveclock  noa11y"
 
 make && sudo make install
 
