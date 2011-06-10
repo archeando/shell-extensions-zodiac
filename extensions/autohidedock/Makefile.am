@@ -1,4 +1,4 @@
-EXTENSION_ID = dock
+EXTENSION_ID = autohidedock
 
 include ../../extension.mk
 
