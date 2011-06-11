@@ -104,7 +104,7 @@ function _toggleHideable(actor, event) {
 function main() {
  
     Main.panel.hidden = false;               
-    Main.panel.hideable = false;
+    Main.panel.hideable = true;
     Main.panel.hidetime = 0;
 
     Main.panel._hidePanel = _hidePanel;
