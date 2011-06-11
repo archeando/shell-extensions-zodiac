@@ -33,7 +33,6 @@ const DOCK_SIZE_KEY = 'size';
 
 //hide
 const AUTOHIDE_ANIMATION_TIME = 0.2;
-//const TIME_DELTA = 1500;
 
 // Keep enums in sync with GSettings schemas
 const PositionMode = {
@@ -110,23 +109,12 @@ _hideDock:function() {
             default:
                 cornerX = monitor.x + monitor.width-1;
         }
- /*       Tweener.addTween(this.actor,
-                     {  width: 1,
-                       time: AUTOHIDE_ANIMATION_TIME,
-                       transition: 'easeOutQuad'
-                     });*/
       
         Tweener.addTween(this.actor,
                      { x: cornerX,
                        time: AUTOHIDE_ANIMATION_TIME,
                        transition: 'easeOutQuad'
                      });
-       /*  Tweener.addTween(this.actor,
-                     { opacity: 0,
-                       time: AUTOHIDE_ANIMATION_TIME+0.2,
-                       transition: 'easeOutQuad'
-                     });*/
-
 },
 
 _showDock:function() {
@@ -146,22 +134,11 @@ _showDock:function() {
                 position_x=monitor.width-this._item_size-this._spacing-2;
         }
 
-/*       Tweener.addTween(this.actor,
-                     { width: this._item_size + 4*this._spacing,
-                       time: AUTOHIDE_ANIMATION_TIME+0.2,
-                       transition: 'easeOutQuad'
-                     });*/
         Tweener.addTween(this.actor,
                      { x: position_x,
                        time: AUTOHIDE_ANIMATION_TIME,
                        transition: 'easeOutQuad'
         });
-
-       /*Tweener.addTween(this.actor,
-                     { opacity: 255,
-                       time: AUTOHIDE_ANIMATION_TIME+0.2,
-                       transition: 'easeOutQuad'
-                     });*/
 
 },
 // funciones hide fin
