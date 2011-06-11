@@ -32,7 +32,7 @@ const DOCK_SIZE_KEY = 'size';
 
 
 //hide
-const AUTOHIDE_ANIMATION_TIME = 0.2;
+const AUTOHIDE_ANIMATION_TIME = 0.4;
 //const TIME_DELTA = 1500;
 
 // Keep enums in sync with GSettings schemas
@@ -118,7 +118,7 @@ _hideDock:function() {
       
         Tweener.addTween(this.actor,
                      { x: cornerX,
-                       time: AUTOHIDE_ANIMATION_TIME,
+                       time: AUTOHIDE_ANIMATION_TIME+0.2,
                        transition: 'easeOutQuad'
                      });
        /*  Tweener.addTween(this.actor,
@@ -153,7 +153,7 @@ _showDock:function() {
                      });*/
         Tweener.addTween(this.actor,
                      { x: position_x,
-                       time: AUTOHIDE_ANIMATION_TIME,
+                       time: AUTOHIDE_ANIMATION_TIME+0.2,
                        transition: 'easeOutQuad'
         });
 
@@ -576,5 +576,5 @@ DockIconMenu.prototype = {
 function main(extensionMeta) {
     imports.gettext.bindtextdomain('gnome-shell-extensions', extensionMeta.localedir);
 
-    let autohidedock = new Dock();
+    let dock = new Dock();
  }

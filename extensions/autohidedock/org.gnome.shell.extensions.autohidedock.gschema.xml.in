@@ -5,7 +5,7 @@
   </enum>
 
   <schema id="org.gnome.shell.extensions.autohidedock" path="/org/gnome/shell/extensions/autohidedock/">
-    <key name="position" enum="org.gnome.shell.extensions.autohidedock.PositionMode">
+    <key name="position" enum="org.gnome.shell.extensions.dock.PositionMode">
       <default>'right'</default>
       <_summary>Position of the dock</_summary>
       <_description>Sets the position of the dock in the screen. Allowed values are 'right' or 'left'</_description>
