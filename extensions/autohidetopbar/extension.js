@@ -45,7 +45,7 @@ function _hidePanel() {
                      });*/
 
         Tweener.addTween(Main.panel.actor,
-                     { y: 0- PANEL_HEIGHT+2,
+                     { y: 0- PANEL_HEIGHT+5,
                        time: AUTOHIDE_ANIMATION_TIME,
                        transition: 'easeOutQuad'
                      });
