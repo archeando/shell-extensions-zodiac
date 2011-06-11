@@ -1,0 +1,16 @@
+<schemalist gettext-domain="gnome-shell-extensions">
+  <enum id='org.gnome.shell.extensions.moveclock.PositionMode'>
+    <value nick='left' value='0'/>
+    <value nick='right' value='1'/>
+    <value nick='center' value='2'/>
+    <value nick='hide' value='3'/>
+  </enum>
+
+  <schema id="org.gnome.shell.extensions.moveclock" path="/org/gnome/shell/extensions/moveclock/">
+    <key name="position" enum="org.gnome.shell.extensions.moveclock.PositionMode">
+      <default>'center'</default>
+      <_summary>Position of the clock</_summary>
+      <_description>Sets the position of the clock in the panel. Allowed values are 'right' , 'left', 'center' or 'hide'</_description>
+    </key>
+   </schema>
+</schemalist>

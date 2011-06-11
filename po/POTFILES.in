@@ -1,0 +1,5 @@
+extensions/moveclock/extensions.js
+extensions/moveclock/org.gnome.shell.moveclock.xml.in
+extensions/activitiesbutton/extensions.js
+extensions/activitiesbutton/org.gnome.shell.activitiesbutton.org.gnome.shell
+

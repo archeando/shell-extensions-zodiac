@@ -1,0 +1,9 @@
+{
+"uuid": "@uuid@",
+"name": "icon-manager",
+"description": "Manage icons in top bar.",
+"original-author":[ "Jakub Krajniak <jkrajniak@gmail.com>" ],
+"shell-version": [ "@shell_current@" ],
+"localedir": "@LOCALEDIR@",
+ "url": "http://clet.blogspot.com/"
+}
