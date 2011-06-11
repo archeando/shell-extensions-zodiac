@@ -20,7 +20,7 @@ const TIME_DELTA = 1500;
 
 function _hidePanel() {
     if (!Main.overview.visible && Main.panel.hideable == true) {
-        Tweener.addTween(Main.panel.actor,
+        /*Tweener.addTween(Main.panel.actor,
                      { height: 1,
                        time: AUTOHIDE_ANIMATION_TIME,
                        transition: 'easeOutQuad'
@@ -42,6 +42,12 @@ function _hidePanel() {
                      { opacity: 0,
                        time: AUTOHIDE_ANIMATION_TIME,
                        transition: 'easeOutQuad'
+                     });*/
+
+        Tweener.addTween(Main.panel.actor,
+                     { y: 0- PANEL_HEIGHT+2,
+                       time: AUTOHIDE_ANIMATION_TIME,
+                       transition: 'easeOutQuad'
                      });
 
         Main.panel.hidden = true;
@@ -50,7 +56,7 @@ function _hidePanel() {
 
 function _showPanel() {
     if (Main.panel.hidden == true) {
-        Tweener.addTween(Main.panel._leftCorner.actor,
+       /* Tweener.addTween(Main.panel._leftCorner.actor,
                      { y: PANEL_HEIGHT -1,
                        time: AUTOHIDE_ANIMATION_TIME+0.2,
                        transition: 'easeOutQuad'
@@ -72,7 +78,14 @@ function _showPanel() {
                      { height: PANEL_HEIGHT,
                        time: AUTOHIDE_ANIMATION_TIME,
                        transition: 'easeOutQuad'
+                     });*/
+
+        Tweener.addTween(Main.panel.actor,
+                     { y: 0,
+                       time: AUTOHIDE_ANIMATION_TIME,
+                       transition: 'easeOutQuad'
                      });
+
 
         Main.panel.hidden = false;
     }
