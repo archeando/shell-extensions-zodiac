@@ -1,8 +1,0 @@
-{
-   "uuid": "@uuid@",
-   "name": "Activities Button",
-   "description": "Change look of Activities button area",
-   "original-authors": [ "Miguel Aguilar" ],
-   "shell-version": [ "@shell_current@" ],
-   "url": "@url@"
-}

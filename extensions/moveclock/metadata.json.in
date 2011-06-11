@@ -1,9 +1,0 @@
-{
-"uuid": "@uuid@",
-"name": "MoveClock",
-"description": "Move the position of clock",
-"original-author":[ "zodiac_es@yahoo.es" ],
-"shell-version": [ "@shell_current@" ],
-"localedir": "@LOCALEDIR@",
-"url": "@url@"
-}

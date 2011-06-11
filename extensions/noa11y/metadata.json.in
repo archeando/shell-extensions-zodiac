@@ -1,9 +1,0 @@
-{
-"uuid": "@uuid@",
-"name": "NoA11Y",
-"description": "Remove a11y icon/menu from panel",
-"original-author":[ "zodiac_es@yahoo.es" ],
-"shell-version": [ "@shell_current@" ],
-"localedir": "@LOCALEDIR@",
-"url": "@url@"
-}
