@@ -26,7 +26,7 @@ function _hidePanel() {
                        transition: 'easeOutQuad'
                      });
 
-        Tweener.addTween(Main.panel._leftCorner.actor,
+        /*Tweener.addTween(Main.panel._leftCorner.actor,
                      { y: 0,
                        time: AUTOHIDE_ANIMATION_TIME,
                        transition: 'easeOutQuad'
@@ -36,7 +36,7 @@ function _hidePanel() {
                      { y: 0,
                        time: AUTOHIDE_ANIMATION_TIME,
                        transition: 'easeOutQuad'
-                     });
+                     });*/
 
         Tweener.addTween(Main.panel._boxContainer,
                      { opacity: 0,
@@ -44,23 +44,29 @@ function _hidePanel() {
                        transition: 'easeOutQuad'
                      });
 
+        /*Tweener.addTween(Main.panel.actor,
+                     { y: 0-Main.panel.actor.height+3,
+                       time: AUTOHIDE_ANIMATION_TIME,
+                       transition: 'easeOutQuad'
+                     });*/
+
         Main.panel.hidden = true;
     }
 }
 
 function _showPanel() {
     if (Main.panel.hidden == true) {
-        Tweener.addTween(Main.panel._leftCorner.actor,
-                     { y: Main.panel.actor.height - 1,
+        /*Tweener.addTween(Main.panel._leftCorner.actor,
+                     { y: PANEL_HEIGHT -1,
                        time: AUTOHIDE_ANIMATION_TIME+0.2,
                        transition: 'easeOutQuad'
                      });
 
         Tweener.addTween(Main.panel._rightCorner.actor,
-                     { y: Main.panel.actor.height -1,
+                     { y: PANEL_HEIGHT -1,
                        time: AUTOHIDE_ANIMATION_TIME+0.2,
                        transition: 'easeOutQuad'
-                     });
+                     });*/
 
         Tweener.addTween(Main.panel._boxContainer,
                      { opacity: 255,
@@ -69,10 +75,17 @@ function _showPanel() {
                      });
 
         Tweener.addTween(Main.panel.actor,
-                     { height: Main.panel.actor.height,
+                     { height: PANEL_HEIGHT,
                        time: AUTOHIDE_ANIMATION_TIME,
                        transition: 'easeOutQuad'
                      });
+
+        /*Tweener.addTween(Main.panel.actor,
+                     { y: 0,
+                       time: AUTOHIDE_ANIMATION_TIME,
+                       transition: 'easeOutQuad'
+                     });*/
+
 
         Main.panel.hidden = false;
     }
