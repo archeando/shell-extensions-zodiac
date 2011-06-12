@@ -13,7 +13,7 @@ const PanelMenu = imports.ui.panelMenu;
 const Main = imports.ui.main;
 const Tweener = imports.ui.tweener;
 
-const PANEL_HEIGHT = 31;
+const PANEL_HEIGHT = Main.panel.actor.height;
 const AUTOHIDE_ANIMATION_TIME = 0.2;
 const TIME_DELTA = 1000;
 
@@ -68,7 +68,7 @@ function _showPanel() {
                      });
 
         Tweener.addTween(Main.panel.actor,
-                     { height: Main.panel.actor.height,
+                     { height: PANEL_HEIGHT,
                        time: AUTOHIDE_ANIMATION_TIME,
                        transition: 'easeOutQuad'
                      });
