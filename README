@@ -26,7 +26,7 @@ Add/remove icons from top bar panel by simple editing dconf settings
 Install
 =======
 
- ./autogen.sh --prefix=/usr --disable-schemas-compile --enable-extensions="activitiesbutton autohidedock autohidetopbar moveclock  noa11y"
+ ./autogen.sh --prefix=/usr --disable-schemas-compile --enable-extensions="activitiesbutton autohidedock autohidetopbar icon-manager moveclock"
 
 make && sudo make install
 
