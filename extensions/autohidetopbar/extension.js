@@ -43,13 +43,6 @@ function _hidePanel() {
                        time: AUTOHIDE_ANIMATION_TIME,
                        transition: 'easeOutQuad'
                      });
-
-        /*Tweener.addTween(Main.panel.actor,
-                     { y: 0-Main.panel.actor.height+3,
-                       time: AUTOHIDE_ANIMATION_TIME,
-                       transition: 'easeOutQuad'
-                     });*/
-
         Main.panel.hidden = true;
     }
 }
@@ -75,17 +68,10 @@ function _showPanel() {
                      });
 
         Tweener.addTween(Main.panel.actor,
-                     { height: PANEL_HEIGHT,
+                     { height: Main.panel.actor.height,
                        time: AUTOHIDE_ANIMATION_TIME,
                        transition: 'easeOutQuad'
                      });
-
-        /*Tweener.addTween(Main.panel.actor,
-                     { y: 0,
-                       time: AUTOHIDE_ANIMATION_TIME,
-                       transition: 'easeOutQuad'
-                     });*/
-
 
         Main.panel.hidden = false;
     }
