@@ -15,7 +15,7 @@ const Tweener = imports.ui.tweener;
 
 const PANEL_HEIGHT = 31;
 const AUTOHIDE_ANIMATION_TIME = 0.2;
-const TIME_DELTA = 1500;
+const TIME_DELTA = 1000;
 
 
 function _hidePanel() {
