@@ -29,6 +29,7 @@ const _ = Gettext.gettext;
 const DOCK_SETTINGS_SCHEMA = 'org.gnome.shell.extensions.autohidedock';
 const DOCK_POSITION_KEY = 'position';
 const DOCK_SIZE_KEY = 'size';
+const DOCK_HIDE_KEY = 'autohide';
 
 
 //hide
@@ -42,6 +43,7 @@ const PositionMode = {
 
 let position = PositionMode.RIGHT;
 let dockicon_size = 48;
+let hideable = true;
 const DND_RAISE_APP_TIMEOUT = 500;
 
 
@@ -62,6 +64,7 @@ Dock.prototype = {
         this._settings = new Gio.Settings({ schema: DOCK_SETTINGS_SCHEMA });
         position = this._settings.get_enum(DOCK_POSITION_KEY);
         dockicon_size = this._settings.get_int(DOCK_SIZE_KEY);
+        hideable = this._settings.get_boolean(DOCK_HIDE_KEY);
         //global.log("POSITION: " + position);
         //global.log("dockicon_size: " + dockicon_size);
 
@@ -91,7 +94,7 @@ Dock.prototype = {
         Main.chrome.addActor(this.actor, { visibleInOverview: false });
         this.actor.lower_bottom();
      
-        //hidden   
+        //hidden
         this.actor.connect('leave-event', Lang.bind(this, this._hideDock));
         this.actor.connect('enter-event', Lang.bind(this, this._showDock));
     },
@@ -109,12 +112,14 @@ _hideDock:function() {
             default:
                 cornerX = monitor.x + monitor.width-1;
         }
-      
-        Tweener.addTween(this.actor,
+
+        if (hideable) {
+               Tweener.addTween(this.actor,
                      { x: cornerX,
                        time: AUTOHIDE_ANIMATION_TIME,
                        transition: 'easeOutQuad'
                      });
+        }
 },
 
 _showDock:function() {
@@ -123,7 +128,7 @@ _showDock:function() {
         let size = 0;
         let position_x=0;
 
-       switch (position) {
+        switch (position) {
             case PositionMode.LEFT:
                 size=this._item_size + 4*this._spacing;
                 position_x=0-this._spacing-4;
@@ -134,11 +139,13 @@ _showDock:function() {
                 position_x=monitor.width-this._item_size-this._spacing-2;
         }
 
-        Tweener.addTween(this.actor,
+        if (hideable) {
+           Tweener.addTween(this.actor,
                      { x: position_x,
                        time: AUTOHIDE_ANIMATION_TIME,
                        transition: 'easeOutQuad'
-        });
+           });
+        }
 
 },
 // funciones hide fin
@@ -198,19 +205,24 @@ _showDock:function() {
         let height = (icons)*(this._item_size + this._spacing) + 2*this._spacing;
         let width = (icons)*(this._item_size + this._spacing) + 2*this._spacing;
         
+        this.actor.set_size(this._item_size + 4*this._spacing, height);
         switch (position) {
             case PositionMode.LEFT:
-                this.actor.set_size(this._item_size + 4*this._spacing, height);
-//                this.actor.set_position(0-this._spacing-4, (primary.height-height)/2);
-                this.actor.set_position(1-(this._item_size + 4*this._spacing), (primary.height-height)/2);
+                if (hideable) {
+                        this.actor.set_position(1-(this._item_size + 4*this._spacing), (primary.height-height)/2);
+                } else {
+                        this.actor.set_position(0-this._spacing-4, (primary.height-height)/2);
+                }
                 break;
             case PositionMode.RIGHT:
             default:
-                this.actor.set_size(this._item_size + 4*this._spacing, height);
-//                this.actor.set_position(primary.width-this._item_size-this._spacing-2, (primary.height-height)/2);
-                this.actor.set_position(primary.width-1, (primary.height-height)/2);
-        }
+                if (hideable) {
+                   this.actor.set_position(primary.width-1, (primary.height-height)/2);
+                } else {
+                   this.actor.set_position(primary.width-this._item_size-this._spacing-2, (primary.height-height)/2);
+                }
 
+        }
         
     },
 
