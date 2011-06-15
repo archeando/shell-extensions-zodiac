@@ -99,7 +99,7 @@ Dock.prototype = {
            position = this._settings.get_enum(DOCK_POSITION_KEY);
            dockicon_size = this._settings.get_int(DOCK_SIZE_KEY);
            hideable = this._settings.get_boolean(DOCK_HIDE_KEY);
-           this._queueRedisplay();
+           this._redisplay();
         });
         this._settings.connect('changed::' + DOCK_POSITION_KEY, load_settings_and_refresh); 
         this._settings.connect('changed::' + DOCK_SIZE_KEY, load_settings_and_refresh); 
