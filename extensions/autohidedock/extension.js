@@ -88,7 +88,7 @@ Dock.prototype = {
         this._appSystem = Shell.AppSystem.get_default();
 
         this._appSystem.connect('installed-changed', Lang.bind(this, this._queueRedisplay));
-        AppFavorites.getAppFavorites().connect('changed', Lang.bind(this,  this._queueRedisplay));
+        AppFavorites.getAppFavorites().connect('changed', Lang.bind(this, this._queueRedisplay));
         this._tracker.connect('app-state-changed', Lang.bind(this,this._queueRedisplay));
 
         Main.chrome.addActor(this.actor, { visibleInOverview: false });
@@ -239,7 +239,6 @@ _disableHideDock: function (){
                 } else {
                    this.actor.set_position(primary.width-this._item_size-this._spacing-2, (primary.height-height)/2);
                 }
-
         }
     },
 
@@ -333,7 +332,6 @@ DockIcon.prototype = {
 
         this.actor.connect('button-press-event', Lang.bind(this, function(actor,event) {
                  this._onButtonPress(actor,event);
-
         }));
 
 

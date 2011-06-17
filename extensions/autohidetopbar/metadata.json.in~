@@ -2,7 +2,7 @@
 "uuid": "@uuid@",
 "name": "AutoHideTopPanel",
 "description": "Autohide top panel",
-"original-author":[ "Finnbarr P. Murphy" ],
+"original-author":[ "Finnbarr P. Murphy", "Miguel Aguilar" ],
 "author": [ "Miguel Aguilar <zodiac_es@yahoo.es>" ],
 "shell-version": [ "@shell_current@" ],
 "localedir": "@LOCALEDIR@",
