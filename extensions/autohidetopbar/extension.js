@@ -83,10 +83,19 @@ function _toggleHideable(actor, event) {
    }
 
    Main.panel.hideable = !Main.panel.hideable;
- 
    Main.panel.hidetime = 0;
+   
+   Tweener.addTween(Main.panel._boxContainer,
+                     { opacity: 0,
+                       time: AUTOHIDE_ANIMATION_TIME,
+                       transition: 'easeOutQuad',
+                       onComplete: function() { Tweener.addTween(Main.panel._boxContainer,
+                                                         {opacity: 255,
+		                                          time: AUTOHIDE_ANIMATION_TIME,
+                                                          transition: 'easeOutQuad'}); 
+                                              } 
+                     });
 }
-
 
 function main() {
  
@@ -97,6 +106,7 @@ function main() {
     Main.panel._hidePanel = _hidePanel;
     Main.panel._showPanel = _showPanel;
     Main.panel._toggleHideable = _toggleHideable;
+
 
     Main.panel.actor.connect('leave-event', Lang.bind(Main.panel, Main.panel._hidePanel));
     Main.panel.actor.connect('enter-event', Lang.bind(Main.panel, Main.panel._showPanel));
