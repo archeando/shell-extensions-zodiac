@@ -1,8 +1,8 @@
 { 
 "uuid": "@uuid@",
 "name": "AutoHideDock",
-"description": "A dock autohide for the GNOME Shell -- displays favorite and running applications",
-"original-author":[ "tclaesson@gmail.com", "zodiac_es@yahoo.es" ],
+"description": "A dock for the GNOME Shell -- displays favorite and running applications",
+"original-author": "tclaesson@gmail.com",
 "shell-version": [ "@shell_current@" ],
 "localedir": "@LOCALEDIR@",
 "url": "@url@"
