@@ -31,6 +31,7 @@ const DOCK_POSITION_KEY = 'position';
 const DOCK_SIZE_KEY = 'size';
 const DOCK_HIDE_KEY = 'autohide';
 
+
 //hide
 const AUTOHIDE_ANIMATION_TIME = 0.2;
 
@@ -45,6 +46,7 @@ let dockicon_size = 48;
 let hideable = true;
 let hideDock = true;
 const DND_RAISE_APP_TIMEOUT = 500;
+
 
 function Dock() {
     this._init();
@@ -78,7 +80,7 @@ Dock.prototype = {
 
         this._grid.connect('get-preferred-width', Lang.bind(this, this._getPreferredWidth));
         this._grid.connect('get-preferred-height', Lang.bind(this, this._getPreferredHeight));
-        this._grid.connect('allocate', Lang.bind(this, this._allocate));
+        this._grid.connect('allocate',Lang.bind(this,this._allocate));
 
         this._workId = Main.initializeDeferredWork(this.actor, Lang.bind(this, this._redisplay));
 
@@ -87,7 +89,7 @@ Dock.prototype = {
 
         this._appSystem.connect('installed-changed', Lang.bind(this, this._queueRedisplay));
         AppFavorites.getAppFavorites().connect('changed', Lang.bind(this, this._queueRedisplay));
-        this._tracker.connect('app-state-changed', Lang.bind(this, this._queueRedisplay));
+        this._tracker.connect('app-state-changed', Lang.bind(this,this._queueRedisplay));
 
         Main.chrome.addActor(this.actor, { visibleInOverview: false });
         this.actor.lower_bottom();
@@ -232,11 +234,11 @@ Dock.prototype = {
         switch (position) {
             case PositionMode.LEFT:
                 if (hideable && hideDock) {
-                        this.actor.set_scale(0.01,1);
+                        this.actor.scale_x=0.01;
                         this.actor.set_size(this._item_size + 4*this._spacing, height);
                         this.actor.set_position(0, (primary.height-height)/2);
                 } else {
-                        this.actor.set_scale(1,1);
+                        this.actor.scale_x=1;
                         this.actor.set_size(this._item_size + 4*this._spacing, height);
                         this.actor.set_position(0-2*this._spacing, (primary.height-height)/2);
                 }
@@ -244,11 +246,11 @@ Dock.prototype = {
             case PositionMode.RIGHT:
             default:
                 if (hideable && hideDock) {
-                   this.actor.set_scale(0.01,1);
+                   this.actor.scale_x=0.01;
                    this.actor.set_size(this._item_size + 4*this._spacing, height);
                    this.actor.set_position(primary.width-1, (primary.height-height)/2);
                 } else {
-                   this.actor.set_scale(1,1);
+                   this.actor.scale_x=1;
                    this.actor.set_size(this._item_size + 4*this._spacing, height);
                    this.actor.set_position(primary.width-this._item_size- 2*this._spacing, (primary.height-height)/2);
                 }
@@ -286,8 +288,8 @@ Dock.prototype = {
             children[i].allocate(childBox, flags);
             y += this._item_size + this._spacing;
         }
-    },
 
+    },
 
     _onStyleChanged: function() {
         let themeNode = this.actor.get_theme_node();
@@ -391,14 +393,15 @@ DockIcon.prototype = {
 
     _onButtonPress: function(actor, event) {
         let button = event.get_button();
+        
         if (button == 1) {
             this._removeMenuTimeout();
             this._menuTimeoutId = Mainloop.timeout_add(AppDisplay.MENU_POPUP_TIMEOUT, Lang.bind(this, function() {
                 this.popupMenu();
-            }));
+             }));
         } else if (button == 3) {
             this.popupMenu();
-        }
+         }
     },
 
     _onClicked: function(actor, button) {
@@ -420,7 +423,7 @@ DockIcon.prototype = {
         return this.app.get_id();
     },
 
-    popupMenu: function() {
+    popupMenu: function(actor,event) {
         this._removeMenuTimeout();
         this.actor.fake_release();
  
@@ -442,11 +445,11 @@ DockIcon.prototype = {
             }));
 
             this._menuManager.addMenu(this._menu, true);
-        }
+         }
 
-        this._menu.popup();
+         this._menu.popup();
 
-        return false;
+         return false;
     },
 
     activateWindow: function(metaWindow) {
@@ -531,10 +534,13 @@ DockIconMenu.prototype = {
 
         // Chain our visibility and lifecycle to that of the source
         source.actor.connect('notify::mapped', Lang.bind(this, function () {
-            if (!source.actor.mapped)
+            if (!source.actor.mapped){
                 this.close();
+            }
         }));
-        source.actor.connect('destroy', Lang.bind(this, function () { this.actor.destroy(); }));
+        source.actor.connect('destroy', Lang.bind(this, function () {
+                this.actor.destroy(); 
+        }));
 
         Main.chrome.addActor(this.actor);
     },
@@ -601,5 +607,6 @@ DockIconMenu.prototype = {
 function main(extensionMeta) {
     imports.gettext.bindtextdomain('gnome-shell-extensions', extensionMeta.localedir);
 
-    let dock = new Dock();
+    //let
+        Main.dock = new Dock();
 }
