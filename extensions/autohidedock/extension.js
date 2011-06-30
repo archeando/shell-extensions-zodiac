@@ -101,9 +101,7 @@ Dock.prototype = {
            hideable = this._settings.get_boolean(DOCK_HIDE_KEY);
            this._redisplay();
         });
-        this._settings.connect('changed::' + DOCK_POSITION_KEY, load_settings_and_refresh); 
-        this._settings.connect('changed::' + DOCK_SIZE_KEY, load_settings_and_refresh); 
-        this._settings.connect('changed::' + DOCK_HIDE_KEY, load_settings_and_refresh);
+        this._settings.connect('changed', load_settings_and_refresh); 
  
         this.actor.connect('leave-event', Lang.bind(this, this._hideDock));
         this.actor.connect('enter-event', Lang.bind(this, this._showDock));
@@ -116,22 +114,26 @@ Dock.prototype = {
        let cornerX = 0;
        switch (position) {
             case PositionMode.LEFT:
-                cornerX=1-(this._item_size + 4*this._spacing);
+                cornerX=0;
                 break;
             case PositionMode.RIGHT:
             default:
-                cornerX = monitor.x + monitor.width-1;
+                cornerX = monitor.width-1;
         }
 
         if (hideable) {
                hideDock=true;
-               Tweener.addTween(this.actor,
-                     { x: cornerX,
+               Tweener.addTween(this.actor,{
+                       scale_x: 0.01,
                        time: AUTOHIDE_ANIMATION_TIME,
                        transition: 'easeOutQuad'
                      });
-        } else {
-                this._showDock();
+
+               Tweener.addTween(this.actor,{
+                       x: cornerX,
+                       time: AUTOHIDE_ANIMATION_TIME,
+                       transition: 'easeOutQuad'
+                     });
         }
     },
 
@@ -144,14 +146,20 @@ Dock.prototype = {
         switch (position) {
             case PositionMode.LEFT:
                 size=this._item_size + 4*this._spacing;
-                position_x=0-this._spacing-4;
+                position_x=0-2*this._spacing;
                 break;
             case PositionMode.RIGHT:
             default:
                 size=this._item_size + 4*this._spacing;
-                position_x=monitor.width-this._item_size-this._spacing-2;
+                position_x=monitor.width-this._item_size-2*this._spacing;
         }
         hideDock=false;
+        Tweener.addTween(this.actor,{ 
+                       scale_x: 1,
+                       time: AUTOHIDE_ANIMATION_TIME,
+                       transition: 'easeOutQuad'
+        });
+
         Tweener.addTween(this.actor,{ 
                        x: position_x,
                        time: AUTOHIDE_ANIMATION_TIME,
@@ -223,21 +231,28 @@ Dock.prototype = {
         let height = (icons)*(this._item_size + this._spacing) + 2*this._spacing;
         let width = (icons)*(this._item_size + this._spacing) + 2*this._spacing;
         
-        this.actor.set_size(this._item_size + 4*this._spacing, height);
         switch (position) {
             case PositionMode.LEFT:
                 if (hideable && hideDock) {
-                        this.actor.set_position(1-(this._item_size + 4*this._spacing), (primary.height-height)/2);
+                        this.actor.scale_x=0.01;
+                        this.actor.set_size(this._item_size + 4*this._spacing, height);
+                        this.actor.set_position(0, (primary.height-height)/2);
                 } else {
-                        this.actor.set_position(0-this._spacing-4, (primary.height-height)/2);
+                        this.actor.scale_x=1;
+                        this.actor.set_size(this._item_size + 4*this._spacing, height);
+                        this.actor.set_position(0-2*this._spacing, (primary.height-height)/2);
                 }
                 break;
             case PositionMode.RIGHT:
             default:
                 if (hideable && hideDock) {
+                   this.actor.scale_x=0.01;
+                   this.actor.set_size(this._item_size + 4*this._spacing, height);
                    this.actor.set_position(primary.width-1, (primary.height-height)/2);
                 } else {
-                   this.actor.set_position(primary.width-this._item_size-this._spacing-2, (primary.height-height)/2);
+                   this.actor.scale_x=1;
+                   this.actor.set_size(this._item_size + 4*this._spacing, height);
+                   this.actor.set_position(primary.width-this._item_size- 2*this._spacing, (primary.height-height)/2);
                 }
         }
     },
@@ -275,7 +290,6 @@ Dock.prototype = {
         }
 
     },
-
 
     _onStyleChanged: function() {
         let themeNode = this.actor.get_theme_node();
@@ -593,5 +607,6 @@ DockIconMenu.prototype = {
 function main(extensionMeta) {
     imports.gettext.bindtextdomain('gnome-shell-extensions', extensionMeta.localedir);
 
-    let dock = new Dock();
+    //let
+        Main.dock = new Dock();
 }
