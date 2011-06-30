@@ -229,7 +229,7 @@ Dock.prototype = {
         let height = (icons)*(this._item_size + this._spacing) + 2*this._spacing;
         let width = (icons)*(this._item_size + this._spacing) + 2*this._spacing;
         
-        switch (position) {
+         switch (position) {
             case PositionMode.LEFT:
                 if (hideable && hideDock) {
                         this.actor.set_scale(0.01,1);
