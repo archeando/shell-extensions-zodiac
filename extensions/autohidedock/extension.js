@@ -235,28 +235,68 @@ Dock.prototype = {
         let height = (icons)*(this._item_size + this._spacing) + 2*this._spacing;
         let width = (icons)*(this._item_size + this._spacing) + 2*this._spacing;
         
+        
          switch (position) {
             case PositionMode.LEFT:
                 if (hideable && hideDock) {
-                        this.actor.set_scale(0.01,1);
                         this.actor.set_size(this._item_size + 4*this._spacing, height);
-                        this.actor.set_position(0, (primary.height-height)/2);
+                        Tweener.addTween(this.actor,{
+                          scale_x: 0.01,
+                          time: AUTOHIDE_ANIMATION_TIME,
+                          transition: 'easeOutQuad'
+                        });
+                        Tweener.addTween(this.actor,{ 
+                          x: 0, 
+                          y: (primary.height-height)/2,
+                          time: AUTOHIDE_ANIMATION_TIME,
+                          transition: 'easeOutQuad'
+                        });
                 } else {
-                        this.actor.set_scale(1,1);
                         this.actor.set_size(this._item_size + 4*this._spacing, height);
-                        this.actor.set_position(0-2*this._spacing, (primary.height-height)/2);
+                        Tweener.addTween(this.actor,{
+                          scale_x: 1,
+                          time: AUTOHIDE_ANIMATION_TIME,
+                          transition: 'easeOutQuad'
+                        });
+                        Tweener.addTween(this.actor,{ 
+                          x: 0-2*this._spacing, 
+                          y: (primary.height-height)/2,
+                          time: AUTOHIDE_ANIMATION_TIME,
+                          transition: 'easeOutQuad'
+                        });
+
                 }
                 break;
             case PositionMode.RIGHT:
             default:
+                hideDock=true;
                 if (hideable && hideDock) {
-                   this.actor.set_scale(0.01,1);
+
                    this.actor.set_size(this._item_size + 4*this._spacing, height);
-                   this.actor.set_position(primary.width-1, (primary.height-height)/2);
+                   Tweener.addTween(this.actor,{ 
+                       scale_x: 0.01,
+                       time: AUTOHIDE_ANIMATION_TIME,
+                       transition: 'easeOutQuad'
+                   });
+                   Tweener.addTween(this.actor,{ 
+                       x: primary.width-1, 
+                       y: (primary.height-height)/2,
+                       time: AUTOHIDE_ANIMATION_TIME,
+                       transition: 'easeOutQuad'
+                   });
                 } else {
-                   this.actor.set_scale(1,1);
                    this.actor.set_size(this._item_size + 4*this._spacing, height);
-                   this.actor.set_position(primary.width-this._item_size- 2*this._spacing, (primary.height-height)/2);
+                   Tweener.addTween(this.actor,{ 
+                       scale_x: 1,
+                       time: AUTOHIDE_ANIMATION_TIME,
+                       transition: 'easeOutQuad'
+                   });
+                   Tweener.addTween(this.actor,{
+                       x: primary.width-this._item_size- 2*this._spacing, 
+                       y: (primary.height-height)/2,
+                       time: AUTOHIDE_ANIMATION_TIME,
+                       transition: 'easeOutQuad'
+                   });
                 }
         }
     },
