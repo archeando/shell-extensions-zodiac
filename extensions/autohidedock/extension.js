@@ -143,19 +143,15 @@ Dock.prototype = {
 
     _showDock:function() {
         let monitor = global.get_primary_monitor();
-        let cornerX = monitor.x + monitor.width;
-        let size = 0;
         let position_x=0;
 
         switch (position) {
             case PositionMode.LEFT:
-                size=this._item_size + 4*this._spacing;
                 position_x=0-2*this._spacing;
                 break;
             case PositionMode.RIGHT:
             default:
-                size=this._item_size + 4*this._spacing;
-                position_x=monitor.width-this._item_size-2*this._spacing;
+                 position_x=monitor.width-this._item_size-2*this._spacing;
         }
         hideDock=false;
         Tweener.addTween(this.actor,{ 
