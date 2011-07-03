@@ -32,7 +32,7 @@ const DOCK_SIZE_KEY = 'size';
 const DOCK_HIDE_KEY = 'autohide';
 
 //hide
-const AUTOHIDE_ANIMATION_TIME = 0.2;
+const AUTOHIDE_ANIMATION_TIME = 0.3;
 
 // Keep enums in sync with GSettings schemas
 const PositionMode = {
@@ -62,7 +62,7 @@ Dock.prototype = {
         this._settings = new Gio.Settings({ schema: DOCK_SETTINGS_SCHEMA });
         position = this._settings.get_enum(DOCK_POSITION_KEY);
         dockicon_size = this._settings.get_int(DOCK_SIZE_KEY);
-        hideDock=hideable = this._settings.get_boolean(DOCK_HIDE_KEY);
+        hideDock = hideable = this._settings.get_boolean(DOCK_HIDE_KEY);
         //global.log("POSITION: " + position);
         //global.log("dockicon_size: " + dockicon_size);
 
@@ -103,6 +103,8 @@ Dock.prototype = {
            position = this._settings.get_enum(DOCK_POSITION_KEY);
            dockicon_size = this._settings.get_int(DOCK_SIZE_KEY);
            hideable = this._settings.get_boolean(DOCK_HIDE_KEY);
+           this.actor.y=0;
+           this.actor.set_scale (0,1);
            this._redisplay();
         });
         this._settings.connect('changed', load_settings_and_refresh); 
@@ -125,8 +127,8 @@ Dock.prototype = {
                 cornerX = monitor.width-1;
         }
 
-        if (hideable) {
-               hideDock=true;
+        if (hideable && !hideDock) {
+               Tweener.removeTweens(this.actor);
                Tweener.addTween(this.actor,{
                        scale_x: 0.01,
                        time: AUTOHIDE_ANIMATION_TIME,
@@ -138,6 +140,7 @@ Dock.prototype = {
                        time: AUTOHIDE_ANIMATION_TIME,
                        transition: 'easeOutQuad'
                      });
+               hideDock=true;
         }
     },
 
@@ -153,18 +156,21 @@ Dock.prototype = {
             default:
                  position_x=monitor.width-this._item_size-2*this._spacing;
         }
-        hideDock=false;
-        Tweener.addTween(this.actor,{ 
+        if (hideDock) {
+                Tweener.removeTweens(this.actor);
+                Tweener.addTween(this.actor,{ 
                        scale_x: 1,
                        time: AUTOHIDE_ANIMATION_TIME,
                        transition: 'easeOutQuad'
-        });
+                });
 
-        Tweener.addTween(this.actor,{ 
+                Tweener.addTween(this.actor,{ 
                        x: position_x,
                        time: AUTOHIDE_ANIMATION_TIME,
                        transition: 'easeOutQuad'
-        });
+                });
+                hideDock=false;
+        }
     },
 
     _restoreHideDock: function(){
@@ -232,69 +238,50 @@ Dock.prototype = {
         let width = (icons)*(this._item_size + this._spacing) + 2*this._spacing;
         
         
-         switch (position) {
+        switch (position) {
             case PositionMode.LEFT:
-                if (hideable && hideDock) {
                         this.actor.set_size(this._item_size + 4*this._spacing, height);
-                        Tweener.addTween(this.actor,{
-                          scale_x: 0.01,
-                          time: AUTOHIDE_ANIMATION_TIME,
-                          transition: 'easeOutQuad'
-                        });
-                        Tweener.addTween(this.actor,{ 
-                          x: 0, 
-                          y: (primary.height-height)/2,
-                          time: AUTOHIDE_ANIMATION_TIME,
-                          transition: 'easeOutQuad'
-                        });
-                } else {
-                        this.actor.set_size(this._item_size + 4*this._spacing, height);
-                        Tweener.addTween(this.actor,{
-                          scale_x: 1,
-                          time: AUTOHIDE_ANIMATION_TIME,
-                          transition: 'easeOutQuad'
-                        });
-                        Tweener.addTween(this.actor,{ 
-                          x: 0-2*this._spacing, 
-                          y: (primary.height-height)/2,
-                          time: AUTOHIDE_ANIMATION_TIME,
-                          transition: 'easeOutQuad'
-                        });
-
-                }
+                        if (this.actor.y != 0) {
+                           this.actor.y=(primary.height-height)/2;
+                        } else {
+                           this.actor.x = 0; 
+                           this.actor.set_scale (0,1);
+                           Tweener.addTween(this.actor,{
+                               scale_x: 1,
+                               time: AUTOHIDE_ANIMATION_TIME,
+                               transition: 'easeOutQuad'
+                           });
+                           Tweener.addTween(this.actor,{ 
+                               x: 0-2*this._spacing,
+                               y: (primary.height-height)/2,
+                               time: AUTOHIDE_ANIMATION_TIME,
+                               transition: 'easeOutQuad'
+                           });
+                           hideDock=false;
+                        }
                 break;
             case PositionMode.RIGHT:
             default:
-                hideDock=true;
-                if (hideable && hideDock) {
-
                    this.actor.set_size(this._item_size + 4*this._spacing, height);
-                   Tweener.addTween(this.actor,{ 
-                       scale_x: 0.01,
-                       time: AUTOHIDE_ANIMATION_TIME,
-                       transition: 'easeOutQuad'
-                   });
-                   Tweener.addTween(this.actor,{ 
-                       x: primary.width-1, 
-                       y: (primary.height-height)/2,
-                       time: AUTOHIDE_ANIMATION_TIME,
-                       transition: 'easeOutQuad'
-                   });
-                } else {
-                   this.actor.set_size(this._item_size + 4*this._spacing, height);
-                   Tweener.addTween(this.actor,{ 
-                       scale_x: 1,
-                       time: AUTOHIDE_ANIMATION_TIME,
-                       transition: 'easeOutQuad'
-                   });
-                   Tweener.addTween(this.actor,{
-                       x: primary.width-this._item_size- 2*this._spacing, 
-                       y: (primary.height-height)/2,
-                       time: AUTOHIDE_ANIMATION_TIME,
-                       transition: 'easeOutQuad'
-                   });
-                }
-        }
+                   if (this.actor.y != 0) {
+                       this.actor.y=(primary.height-height)/2;
+                   } else {
+                       this.actor.x = primary.width-1;
+                       this.actor.set_scale (0,1);
+                       Tweener.addTween(this.actor,{ 
+                           scale_x: 1,
+                           time: AUTOHIDE_ANIMATION_TIME,
+                           transition: 'easeOutQuad'
+                       });
+                       Tweener.addTween(this.actor,{
+                           x: primary.width-this._item_size- 2*this._spacing, 
+                           y: (primary.height-height)/2,
+                           time: AUTOHIDE_ANIMATION_TIME,
+                           transition: 'easeOutQuad'
+                       });
+                       hideDock=false;
+                   }
+       }
     },
 
     _getPreferredWidth: function (grid, forHeight, alloc) {
@@ -480,7 +467,8 @@ DockIcon.prototype = {
                     this._autohidedock._restoreHideDock();
                     this._autohidedock._hideDock();
 
-                    this._onMenuPoppedDown();}
+                    this._onMenuPoppedDown();
+                }
             }));
 
             this._menuManager.addMenu(this._menu, true);
