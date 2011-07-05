@@ -65,8 +65,7 @@ Dock.prototype = {
         hideDock = hideable = this._settings.get_boolean(DOCK_HIDE_KEY);
         //global.log("POSITION: " + position);
         //global.log("dockicon_size: " + dockicon_size);
-
-
+     
         this._spacing = 4;
         this._item_size = dockicon_size;
 
@@ -103,8 +102,8 @@ Dock.prototype = {
            position = this._settings.get_enum(DOCK_POSITION_KEY);
            dockicon_size = this._settings.get_int(DOCK_SIZE_KEY);
            hideable = this._settings.get_boolean(DOCK_HIDE_KEY);
+           // to redraw the dock
            this.actor.y=0;
-           this.actor.set_scale (0,1);
            this._redisplay();
         });
         this._settings.connect('changed', load_settings_and_refresh); 
@@ -128,15 +127,9 @@ Dock.prototype = {
         }
 
         if (hideable && !hideDock) {
-               Tweener.removeTweens(this.actor);
-               Tweener.addTween(this.actor,{
-                       scale_x: 0.01,
-                       time: AUTOHIDE_ANIMATION_TIME,
-                       transition: 'easeOutQuad'
-                     });
-
                Tweener.addTween(this.actor,{
                        x: cornerX,
+                       scale_x: 0.01,
                        time: AUTOHIDE_ANIMATION_TIME,
                        transition: 'easeOutQuad'
                      });
@@ -157,15 +150,9 @@ Dock.prototype = {
                  position_x=monitor.width-this._item_size-2*this._spacing;
         }
         if (hideDock) {
-                Tweener.removeTweens(this.actor);
-                Tweener.addTween(this.actor,{ 
-                       scale_x: 1,
-                       time: AUTOHIDE_ANIMATION_TIME,
-                       transition: 'easeOutQuad'
-                });
-
                 Tweener.addTween(this.actor,{ 
                        x: position_x,
+                       scale_x: 1,
                        time: AUTOHIDE_ANIMATION_TIME,
                        transition: 'easeOutQuad'
                 });
@@ -235,52 +222,55 @@ Dock.prototype = {
 
         let primary = global.get_primary_monitor();
         let height = (icons)*(this._item_size + this._spacing) + 2*this._spacing;
-        let width = (icons)*(this._item_size + this._spacing) + 2*this._spacing;
+        let width = this._item_size + 4*this._spacing;
         
-        
-        switch (position) {
-            case PositionMode.LEFT:
-                        this.actor.set_size(this._item_size + 4*this._spacing, height);
-                        if (this.actor.y != 0) {
-                           this.actor.y=(primary.height-height)/2;
-                        } else {
-                           this.actor.x = 0; 
-                           this.actor.set_scale (0,1);
-                           Tweener.addTween(this.actor,{
-                               scale_x: 1,
-                               time: AUTOHIDE_ANIMATION_TIME,
-                               transition: 'easeOutQuad'
-                           });
+        if (this.actor.y != 0) {
+                //It has only been added/removed an icon from the dock, 
+                //only changes the height and position of "Y"
+                // effect to add/delete icons
+                Tweener.addTween(this.actor,{ 
+                   y: (primary.height-height)/2,
+                   height: height, 
+                   time: AUTOHIDE_ANIMATION_TIME, 
+                   transition: 'easeOutQuad'
+                });
+        } else {
+                // The dock should be redrawn entirely 
+                //(creation or change of values ​​in the configuration)
+                this.actor.set_scale (0,0);
+                this.actor.set_size (width,height);
+
+                // set the position of the dock
+                switch (position) {
+                        case PositionMode.LEFT:
+                           this.actor.x = 0;
+                           // effect of creation of the dock
                            Tweener.addTween(this.actor,{ 
                                x: 0-2*this._spacing,
                                y: (primary.height-height)/2,
-                               time: AUTOHIDE_ANIMATION_TIME,
+                               time: AUTOHIDE_ANIMATION_TIME * 3,
                                transition: 'easeOutQuad'
                            });
-                           hideDock=false;
-                        }
-                break;
-            case PositionMode.RIGHT:
-            default:
-                   this.actor.set_size(this._item_size + 4*this._spacing, height);
-                   if (this.actor.y != 0) {
-                       this.actor.y=(primary.height-height)/2;
-                   } else {
-                       this.actor.x = primary.width-1;
-                       this.actor.set_scale (0,1);
-                       Tweener.addTween(this.actor,{ 
-                           scale_x: 1,
-                           time: AUTOHIDE_ANIMATION_TIME,
-                           transition: 'easeOutQuad'
-                       });
-                       Tweener.addTween(this.actor,{
-                           x: primary.width-this._item_size- 2*this._spacing, 
-                           y: (primary.height-height)/2,
-                           time: AUTOHIDE_ANIMATION_TIME,
-                           transition: 'easeOutQuad'
-                       });
-                       hideDock=false;
-                   }
+                           break;
+                        case PositionMode.RIGHT:
+                        default:
+                           this.actor.x = primary.width-1;
+                           // effect of creation of the dock
+                           Tweener.addTween(this.actor,{
+                               x: primary.width-this._item_size- 2*this._spacing, 
+                               y: (primary.height-height)/2,
+                               time: AUTOHIDE_ANIMATION_TIME * 3,
+                               transition: 'easeOutQuad'
+                           });
+                }
+
+                Tweener.addTween(this.actor,{
+                   scale_x: 1,
+                   scale_y: 1,
+                   time: AUTOHIDE_ANIMATION_TIME * 3,
+                   transition: 'easeOutQuad'
+                });
+                hideDock=false;
        }
     },
 
