@@ -100,7 +100,7 @@ Dock.prototype = {
         //hidden
         let load_settings_and_refresh = Lang.bind(this, function() {
            position = this._settings.get_enum(DOCK_POSITION_KEY);
-           dockicon_size = this._settings.get_int(DOCK_SIZE_KEY);
+           this._item_size = dockicon_size = this._settings.get_int(DOCK_SIZE_KEY);
            hideable = this._settings.get_boolean(DOCK_HIDE_KEY);
            // to redraw the dock
            this.actor.y=0;
@@ -223,14 +223,14 @@ Dock.prototype = {
         let primary = global.get_primary_monitor();
         let height = (icons)*(this._item_size + this._spacing) + 2*this._spacing;
         let width = this._item_size + 4*this._spacing;
-        
+
         if (this.actor.y != 0) {
                 //It has only been added/removed an icon from the dock, 
                 //only changes the height and position of "Y"
                 // effect to add/delete icons
                 Tweener.addTween(this.actor,{ 
                    y: (primary.height-height)/2,
-                   height: height, 
+                   height: height,
                    time: AUTOHIDE_ANIMATION_TIME, 
                    transition: 'easeOutQuad'
                 });
