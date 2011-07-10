@@ -27,5 +27,10 @@
 	<_summary>Effect autohide</_summary>
 	<_description>Sets the effect of the hide dock. Allowed values are 'resize' or 'rescale'</_description>
     </key>
+    <key name="durationeffect" type="d">
+      <default>0.3</default>
+      <_summary>duration of effect</_summary>
+      <_description>Sets the time duration of the effect of hidden.</_description>
+    </key>
   </schema>
 </schemalist>
