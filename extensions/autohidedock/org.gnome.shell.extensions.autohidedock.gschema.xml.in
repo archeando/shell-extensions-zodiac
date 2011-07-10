@@ -23,7 +23,7 @@
 	<_summary>Enable/disable autohide</_summary>
     </key>
     <key name="effecthide" enum="org.gnome.shell.extensions.autohidedock.AutoHideEfect">
-	<default>'rescale'</default>
+	<default>'resize'</default>
 	<_summary>Effect autohide</_summary>
 	<_description>Sets the effect of the hide dock. Allowed values are 'resize' or 'rescale'</_description>
     </key>

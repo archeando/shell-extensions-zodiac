@@ -30,6 +30,7 @@ const DOCK_SETTINGS_SCHEMA = 'org.gnome.shell.extensions.autohidedock';
 const DOCK_POSITION_KEY = 'position';
 const DOCK_SIZE_KEY = 'size';
 const DOCK_HIDE_KEY = 'autohide';
+const DOCK_EFFECTHIDE_KEY = 'effecthide';
 
 //hide
 const AUTOHIDE_ANIMATION_TIME = 0.3;
@@ -49,7 +50,7 @@ let position = PositionMode.RIGHT;
 let dockicon_size = 48;
 let hideable = true;
 let hideDock = true;
-let hideEfect = AutoHideEfect.RESCALE;
+let hideEffect = AutoHideEfect.RESCALE;
 const DND_RAISE_APP_TIMEOUT = 500;
 
 /*************************************************************************************/
@@ -136,6 +137,7 @@ function showEfectAddItem_size () {
 /**** start rescale's Dock functions                                  *****************/
 /**************************************************************************************/
 function hideDock_scale () {
+       this._item_size = dockicon_size;
        let monitor = global.get_primary_monitor();
        let cornerX = 0;
        let height = this._nicons*(this._item_size + this._spacing) + 2*this._spacing;
@@ -152,6 +154,7 @@ function hideDock_scale () {
 
         if (hideable) {
                Tweener.addTween(this.actor,{
+                       y: (monitor.height-height)/2,
                        x: cornerX,
                        height:height,
                        width: width,
@@ -164,6 +167,7 @@ function hideDock_scale () {
 }
 
 function showDock_scale () {
+        this._item_size = dockicon_size;
         let monitor = global.get_primary_monitor();
         let position_x=0;
         let height = this._nicons*(this._item_size + this._spacing) + 2*this._spacing;
@@ -177,17 +181,16 @@ function showDock_scale () {
             default:
                  position_x=monitor.width-this._item_size-2*this._spacing;
         }
-        if (hideDock) {
-                Tweener.addTween(this.actor,{ 
-                       x: position_x,
-                       height: height,
-                       width: width,
-                       scale_x: 1,
-                       time: AUTOHIDE_ANIMATION_TIME,
-                       transition: 'easeOutQuad'
-                });
-                hideDock=false;
-        }
+        Tweener.addTween(this.actor,{
+                y: (monitor.height-height)/2, 
+                x: position_x,
+                height: height,
+                width: width,
+                scale_x: 1,
+                time: AUTOHIDE_ANIMATION_TIME,
+                transition: 'easeOutQuad'
+        });
+        hideDock=false;
 }
 
 function initShowDock_scale () {
@@ -231,12 +234,12 @@ function initShowDock_scale () {
 }
 
 function showEfectAddItem_scale () {
-        let primary = global.get_primary_monitor();
-        let height = (this._nicons)*(this._item_size + this._spacing) + 2*this._spacing;
-        let width = this._item_size + 4*this._spacing;        
+        let monitor = global.get_primary_monitor();
+        let height = this._nicons*(this._item_size + this._spacing) + 2*this._spacing;
+        let width = this._item_size + 4*this._spacing;
 
         Tweener.addTween(this.actor,{ 
-                y: (primary.height-height)/2,
+                y: (monitor.height-height)/2,
                 height: height,
                 width: width,
                 time: AUTOHIDE_ANIMATION_TIME, 
@@ -261,6 +264,7 @@ Dock.prototype = {
         position = this._settings.get_enum(DOCK_POSITION_KEY);
         dockicon_size = this._settings.get_int(DOCK_SIZE_KEY);
         hideDock = hideable = this._settings.get_boolean(DOCK_HIDE_KEY);
+        hideEffect = this._settings.get_enum(DOCK_EFFECTHIDE_KEY);
         //global.log("POSITION: " + position);
         //global.log("dockicon_size: " + dockicon_size);
 
@@ -268,7 +272,7 @@ Dock.prototype = {
         this._spacing = 4;
         this._item_size = dockicon_size;
         this._nicons = 0;
-        /*switch (hideEfect) {
+        /*switch (hideEffect) {
                 case AutoHideEfect.RESCALE:
                      this._item_size=dockicon_size;
                      break;
@@ -314,12 +318,12 @@ Dock.prototype = {
  
         this._settings.connect('changed::'+DOCK_SIZE_KEY, Lang.bind(this, function (){
                 dockicon_size = this._settings.get_int(DOCK_SIZE_KEY);
-                switch (hideEfect) {
+                /*switch (hideEffect) {
                 case AutoHideEfect.RESCALE:
                      this._item_size=dockicon_size;
                      break;
                 case AutoHideEfect.RESIZE:
-                }       
+                }*/       
                 this._redisplay();        
         }));
 
@@ -333,9 +337,30 @@ Dock.prototype = {
                         this._showDock();
                 }
         }));
- 
-        this.actor.connect('leave-event', Lang.bind(this, this._hideDock));
-        this.actor.connect('enter-event', Lang.bind(this, this._showDock));
+
+        this._settings.connect('changed::'+DOCK_EFFECTHIDE_KEY, Lang.bind(this, function (){
+                hideEffect = this._settings.get_enum(DOCK_EFFECTHIDE_KEY);
+                this.actor.y=0;
+                
+                switch (hideEffect) {
+                        case AutoHideEfect.RESCALE:
+                           this._item_size=dockicon_size;
+                           break;
+                        case AutoHideEfect.RESIZE:
+                           this.actor.set_scale (1,1);
+                }
+                this.actor.disconnect(leave_event);
+                this.actor.disconnect(enter_event);
+
+                this._selectFunctionsHide ();
+
+                leave_event = this.actor.connect('leave-event', Lang.bind(this, this._hideDock));
+                enter_event = this.actor.connect('enter-event', Lang.bind(this, this._showDock));
+                this._redisplay();
+        }));
+
+        let leave_event = this.actor.connect('leave-event', Lang.bind(this, this._hideDock));
+        let enter_event = this.actor.connect('enter-event', Lang.bind(this, this._showDock));
     },
 
     // fuctions hide
@@ -348,7 +373,7 @@ Dock.prototype = {
     },
 
     _selectFunctionsHide: function () {
-        switch (hideEfect) {
+        switch (hideEffect) {
                 case AutoHideEfect.RESCALE:
                    this._hideDock = hideDock_scale;
                    this._showDock = showDock_scale;
