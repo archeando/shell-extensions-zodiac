@@ -50,7 +50,7 @@ let position = PositionMode.RIGHT;
 let dockicon_size = 48;
 let hideable = true;
 let hideDock = true;
-let hideEffect = AutoHideEfect.RESCALE;
+let hideEffect = AutoHideEfect.RESIZE;
 const DND_RAISE_APP_TIMEOUT = 500;
 
 /*************************************************************************************/
