@@ -3,7 +3,10 @@
     <value nick='left' value='0'/>
     <value nick='right' value='1'/>
   </enum>
-
+  <enum id='org.gnome.shell.extensions.autohidedock.AutoHideEfect'>
+    <value nick='resize' value='0'/>
+    <value nick='rescale' value='1'/>
+  </enum>
   <schema id="org.gnome.shell.extensions.autohidedock" path="/org/gnome/shell/extensions/autohidedock/">
     <key name="position" enum="org.gnome.shell.extensions.autohidedock.PositionMode">
       <default>'right'</default>
@@ -18,6 +21,11 @@
     <key name="autohide" type="b">
 	<default>true</default>
 	<_summary>Enable/disable autohide</_summary>
+    </key>
+    <key name="effectHide" enum="org.gnome.shell.extensions.autohidedock.AutoHideEfect">
+	<default>'rescale'</default>
+	<_summary>Effect autohide</_summary>
+	<_description>Sets the effect of the hide dock. Allowed values are 'resize' or 'rescale'</_description>
     </key>
   </schema>
 </schemalist>
