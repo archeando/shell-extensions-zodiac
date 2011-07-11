@@ -33,6 +33,7 @@ const DOCK_HIDE_KEY = 'autohide';
 const DOCK_EFFECTHIDE_KEY = 'effecthide';
 const DOCK_AUTOHIDE_ANIMATION_TIME_KEY = 'durationeffect';
 
+
 //hide
 //const autohide_animation_time = 0.3;
 
@@ -61,7 +62,7 @@ const DND_RAISE_APP_TIMEOUT = 500;
 function hideDock_size () {
     if (hideable){
        let monitor = global.get_primary_monitor()
-       let position_x = 0;
+       let position_x = monitor.x;
        let height = (this._nicons)*(this._item_size + this._spacing) + 2*this._spacing;
        let width = this._item_size + 4*this._spacing;
 
@@ -74,13 +75,13 @@ function hideDock_size () {
                    width = this._item_size + 4*this._spacing;
                    switch (position) {
                        case PositionMode.LEFT:
-                               position_x=0-2*this._spacing;
-                               break;
+                              position_x=monitor.x-2*this._spacing;
+                              break;
                        case PositionMode.RIGHT:
                        default:
-                               position_x = monitor.width-1-this._item_size-2*this._spacing;
+                              position_x = monitor.x + (monitor.width-1-this._item_size-2*this._spacing);
                    }
-                   this.actor.set_position (position_x,(monitor.height-height)/2);
+                   this.actor.set_position (position_x,monitor.y+(monitor.height-height)/2);
                    this.actor.set_size(width,height);
               },
        });
@@ -92,7 +93,7 @@ function showDock_size () {
      let monitor = global.get_primary_monitor();
      let height = (this._nicons)*(this._item_size + this._spacing) + 2*this._spacing;
      let width = this._item_size + 4*this._spacing;
-     let position_x = 0;
+     let position_x = monitor.x;
 
      Tweener.addTween(this,{
              _item_size: dockicon_size,
@@ -103,13 +104,13 @@ function showDock_size () {
                 width = this._item_size + 4*this._spacing;
                 switch (position) {
                    case PositionMode.LEFT:
-                      position_x=0-2*this._spacing;
+                      position_x=monitor.x-2*this._spacing;
                       break;
                    case PositionMode.RIGHT:
                    default:
-                      position_x=monitor.width-this._item_size-2*this._spacing;
+                      position_x=monitor.x + (monitor.width-this._item_size-2*this._spacing);
                 }
-                this.actor.set_position (position_x,(monitor.height-height)/2);
+                this.actor.set_position (position_x, monitor.y+(monitor.height-height)/2);
                 this.actor.set_size(width,height);
              }
      });
@@ -127,7 +128,7 @@ function showEfectAddItem_size () {
         let width = this._item_size + 4*this._spacing;        
 
         Tweener.addTween(this.actor,{ 
-                y: (primary.height-height)/2,
+                y: primary.y + (primary.height-height)/2,
                 height: height,
                 width: width,
                 time: autohide_animation_time, 
@@ -147,16 +148,16 @@ function hideDock_scale () {
 
        switch (position) {
             case PositionMode.LEFT:
-                cornerX=0;
+                cornerX=monitor.x;
                 break;
             case PositionMode.RIGHT:
             default:
-                cornerX = monitor.width-1;
+                cornerX = monitor.x + monitor.width-1;
         }
 
         if (hideable) {
                Tweener.addTween(this.actor,{
-                       y: (monitor.height-height)/2,
+                       y: monitor.y + (monitor.height-height)/2,
                        x: cornerX,
                        height:height,
                        width: width,
@@ -171,21 +172,21 @@ function hideDock_scale () {
 function showDock_scale () {
         this._item_size = dockicon_size;
         let monitor = global.get_primary_monitor();
-        let position_x=0;
+        let position_x = monitor.x;
         let height = this._nicons*(this._item_size + this._spacing) + 2*this._spacing;
         let width = this._item_size + 4*this._spacing;
 
         switch (position) {
             case PositionMode.LEFT:
-                position_x=0-2*this._spacing;
+                position_x=monitor.x-2*this._spacing;
                 break;
             case PositionMode.RIGHT:
             default:
-                 position_x=monitor.width-this._item_size-2*this._spacing;
+                 position_x=monitor.x + (monitor.width-this._item_size-2*this._spacing);
         }
         Tweener.addTween(this.actor,{
-                y: (monitor.height-height)/2, 
-                x: position_x,
+                y: monitor.y + (monitor.height-height)/2, 
+                x: monitor.x + position_x,
                 height: height,
                 width: width,
                 scale_x: 1,
@@ -209,8 +210,8 @@ function initShowDock_scale () {
                    this.actor.x = 0;
                    // effect of creation of the dock
                    Tweener.addTween(this.actor,{ 
-                       x: 0-2*this._spacing,
-                       y: (primary.height-height)/2,
+                       x: primary.x-2*this._spacing,
+                       y: primary.y + (primary.height-height)/2,
                        time: autohide_animation_time * 3,
                        transition: 'easeOutQuad'
                    });
@@ -220,8 +221,8 @@ function initShowDock_scale () {
                    this.actor.x = primary.width-1;
                    // effect of creation of the dock
                    Tweener.addTween(this.actor,{
-                      x: primary.width-this._item_size- 2*this._spacing, 
-                      y: (primary.height-height)/2,
+                      x: primary.x + primary.width-this._item_size- 2*this._spacing, 
+                      y: primary.y + (primary.height-height)/2,
                       time: autohide_animation_time * 3,
                       transition: 'easeOutQuad'
                    });
@@ -241,7 +242,7 @@ function showEfectAddItem_scale () {
         let width = this._item_size + 4*this._spacing;
 
         Tweener.addTween(this.actor,{ 
-                y: (monitor.height-height)/2,
+                y: monitor.y + (monitor.height-height)/2,
                 height: height,
                 width: width,
                 time: autohide_animation_time, 
@@ -271,17 +272,10 @@ Dock.prototype = {
         //global.log("POSITION: " + position);
         //global.log("dockicon_size: " + dockicon_size);
 
-     
+
         this._spacing = 4;
         this._item_size = dockicon_size;
         this._nicons = 0;
-        /*switch (hideEffect) {
-                case AutoHideEfect.RESCALE:
-                     this._item_size=dockicon_size;
-                     break;
-                case AutoHideEfect.RESIZE:
-                     this.actor.set_scale (1,1);
-        }*/
         this._selectFunctionsHide ();
 
         this.actor = new St.BoxLayout({ name: 'dock', vertical: true, reactive: true });
@@ -314,11 +308,12 @@ Dock.prototype = {
      
         //hidden
         this._settings.connect('changed::'+DOCK_POSITION_KEY, Lang.bind(this, function (){
+                let primary = global.get_primary_monitor();
                 position = this._settings.get_enum(DOCK_POSITION_KEY);
-                this.actor.y=0;
+                this.actor.y=primary.y;
                 this._redisplay();        
         }));
- 
+
         this._settings.connect('changed::'+DOCK_SIZE_KEY, Lang.bind(this, function (){
                 dockicon_size = this._settings.get_int(DOCK_SIZE_KEY);
                 this._redisplay();        
@@ -448,7 +443,7 @@ Dock.prototype = {
         let height = (icons)*(this._item_size + this._spacing) + 2*this._spacing;
         let width = this._item_size + 4*this._spacing;        
   
-        if (this.actor.y != 0) {
+        if (this.actor.y != primary.y) {
                 if (hideable && hideDock) {
                         this._hideDock();
                 } else {
