@@ -145,6 +145,7 @@ function hideDock_scale () {
        let cornerX = 0;
        let height = this._nicons*(this._item_size + this._spacing) + 2*this._spacing;
        let width = this._item_size + 4*this._spacing;
+       let scale_x = 0.51/width;
 
        switch (position) {
             case PositionMode.LEFT:
@@ -161,7 +162,7 @@ function hideDock_scale () {
                        x: cornerX,
                        height:height,
                        width: width,
-                       scale_x: 0.025,
+                       scale_x: scale_x,
                        time: autohide_animation_time,
                        transition: 'easeOutQuad'
                      });
