@@ -161,7 +161,7 @@ function hideDock_scale () {
                        x: cornerX,
                        height:height,
                        width: width,
-                       scale_x: 0.50/width,
+                       scale_x: 0.51/width,
                        time: autohide_animation_time,
                        transition: 'easeOutQuad'
                      });
