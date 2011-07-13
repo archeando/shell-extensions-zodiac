@@ -161,7 +161,7 @@ function hideDock_scale () {
                        x: cornerX,
                        height:height,
                        width: width,
-                       scale_x: 0.025,
+                       scale_x: 0.50/width,
                        time: autohide_animation_time,
                        transition: 'easeOutQuad'
                      });
@@ -303,14 +303,14 @@ Dock.prototype = {
         Main.overview.connect('hidden', Lang.bind(this, function() {
             this.actor.show();
         }));
-        Main.chrome.addActor(this.actor);
+        Main.chrome.addActor(this.actor, {affectsStruts: false});
         this.actor.lower_bottom();
 
         //hidden
         this._settings.connect('changed::'+DOCK_POSITION_KEY, Lang.bind(this, function (){
                 let primary = global.get_primary_monitor();
                 position = this._settings.get_enum(DOCK_POSITION_KEY);
-                this.actor.y=primary.y;
+                this.actor.y = primary.y;
                 this._redisplay();
         }));
 
@@ -331,8 +331,9 @@ Dock.prototype = {
         }));
 
         this._settings.connect('changed::'+DOCK_EFFECTHIDE_KEY, Lang.bind(this, function (){
+                let primary = global.get_primary_monitor();
                 hideEffect = this._settings.get_enum(DOCK_EFFECTHIDE_KEY);
-                this.actor.y=0;
+                this.actor.y = primary.y;
 
                 switch (hideEffect) {
                         case AutoHideEffect.RESCALE:
@@ -438,7 +439,7 @@ Dock.prototype = {
             this.actor.add_actor(this._placeholderText);
         }
 
-        let primary = Main.layoutManager.primaryMonitor;
+        let primary = global.get_primary_monitor();
         let height = (icons)*(this._item_size + this._spacing) + 2*this._spacing;
         let width = this._item_size + 4*this._spacing;
 
