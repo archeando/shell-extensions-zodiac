@@ -33,10 +33,5 @@
       <_summary>Autohide duration</_summary>
       <_description>Sets the time duration of the autohide effect.</_description>
     </key>
-    <key name="floating-dock" type="b">
-      <default>true</default>
-      <_summary>Enable/disable floating dock</_summary>
-      <_description>Autohidedock If the function is enabled:<br>The windows do not resize / move to show / hide the dock.<br>If the function is disabled autohidedock:<br>The dock does not interfere with the maximization windows.</_description>
-    </key>
   </schema>
 </schemalist>

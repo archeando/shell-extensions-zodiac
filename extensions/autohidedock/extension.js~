@@ -32,7 +32,6 @@ const DOCK_SIZE_KEY = 'size';
 const DOCK_HIDE_KEY = 'autohide';
 const DOCK_EFFECTHIDE_KEY = 'hide-effect';
 const DOCK_AUTOHIDE_ANIMATION_TIME_KEY = 'hide-effect-duration';
-const DOCK_FLOATING_DOCK_KEY = 'floating-dock';
 
 // Keep enums in sync with GSettings schemas
 const PositionMode = {
@@ -51,7 +50,6 @@ let hideable = true;
 let hideDock = true;
 let hideEffect = AutoHideEffect.RESIZE;
 let autohide_animation_time = 0.3;
-let floating_dock = true;
 const DND_RAISE_APP_TIMEOUT = 500;
 
 /*************************************************************************************/
@@ -267,7 +265,6 @@ Dock.prototype = {
         hideDock = hideable = this._settings.get_boolean(DOCK_HIDE_KEY);
         hideEffect = this._settings.get_enum(DOCK_EFFECTHIDE_KEY);
         autohide_animation_time = this._settings.get_double(DOCK_AUTOHIDE_ANIMATION_TIME_KEY);
-        floating_dock = this._settings.get_boolean(DOCK_FLOATING_DOCK_KEY);
         //global.log("POSITION: " + position);
         //global.log("dockicon_size: " + dockicon_size);
 
@@ -353,17 +350,6 @@ Dock.prototype = {
 
         this._settings.connect('changed::'+DOCK_AUTOHIDE_ANIMATION_TIME_KEY, Lang.bind(this,function (){
                   autohide_animation_time = this._settings.get_double(DOCK_AUTOHIDE_ANIMATION_TIME_KEY);
-        }));
-
-        this._settings.connect('changed::'+DOCK_FLOATING_DOCK_KEY, Lang.bind(this,function (){
-                  floating_dock = this._settings.get_double(DOCK_FLOATING_DOCK_KEY);
-                  if (floating_dock) {
-                        Main.chrome.removeActor(this.actor);
-                        Main.chrome.addActor(this.actor, {affectsStruts: false});
-                  } else {
-                        Main.chrome.removeActor(this.actor);
-                        Main.chrome.addActor(this.actor, {affectsStruts: true});
-                  }
         }));
 
         let leave_event = this.actor.connect('leave-event', Lang.bind(this, this._hideDock));
