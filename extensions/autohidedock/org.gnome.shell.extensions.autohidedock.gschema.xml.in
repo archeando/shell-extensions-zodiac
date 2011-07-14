@@ -36,7 +36,7 @@
     <key name="floating-dock" type="b">
       <default>true</default>
       <_summary>Enable/disable floating dock</_summary>
-      <_description>If the autohide is enabled: The windows do not resize/move to show/hide the dock. If autohide is disabled autohidedock: The dock does not interfere with the maximization windows.</_description>
+      <_description>If the autohide is enabled: The windows do not resize/move to show/hide the dock. If autohide is disabled: The dock does not interfere with the maximization windows.</_description>
     </key>
   </schema>
 </schemalist>

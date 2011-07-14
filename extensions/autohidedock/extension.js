@@ -302,7 +302,11 @@ Dock.prototype = {
         Main.overview.connect('hidden', Lang.bind(this, function() {
             this.actor.show();
         }));
-        Main.chrome.addActor(this.actor, {affectsStruts: false});
+        if (floating_dock) {
+                Main.chrome.addActor(this.actor, {affectsStruts: false});
+        } else {
+                Main.chrome.addActor(this.actor, {affectsStruts: true});
+        }
         this.actor.lower_bottom();
 
         //hidden
@@ -353,17 +357,6 @@ Dock.prototype = {
 
         this._settings.connect('changed::'+DOCK_AUTOHIDE_ANIMATION_TIME_KEY, Lang.bind(this,function (){
                   autohide_animation_time = this._settings.get_double(DOCK_AUTOHIDE_ANIMATION_TIME_KEY);
-        }));
-
-        this._settings.connect('changed::'+DOCK_FLOATING_DOCK_KEY, Lang.bind(this,function (){
-                  floating_dock = this._settings.get_double(DOCK_FLOATING_DOCK_KEY);
-                  if (floating_dock) {
-                        Main.chrome.removeActor(this.actor);
-                        Main.chrome.addActor(this.actor, {affectsStruts: false});
-                  } else {
-                        Main.chrome.removeActor(this.actor);
-                        Main.chrome.addActor(this.actor, {affectsStruts: true});
-                  }
         }));
 
         let leave_event = this.actor.connect('leave-event', Lang.bind(this, this._hideDock));
