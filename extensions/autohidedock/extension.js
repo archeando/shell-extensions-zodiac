@@ -302,11 +302,7 @@ Dock.prototype = {
         Main.overview.connect('hidden', Lang.bind(this, function() {
             this.actor.show();
         }));
-        if (floating_dock) {
-                Main.chrome.addActor(this.actor, {affectsStruts: false});
-        } else {
-                Main.chrome.addActor(this.actor, {affectsStruts: true});
-        }
+        Main.chrome.addActor(this.actor, {affectsStruts: !floating_dock});
         this.actor.lower_bottom();
 
         //hidden
@@ -357,6 +353,11 @@ Dock.prototype = {
 
         this._settings.connect('changed::'+DOCK_AUTOHIDE_ANIMATION_TIME_KEY, Lang.bind(this,function (){
                   autohide_animation_time = this._settings.get_double(DOCK_AUTOHIDE_ANIMATION_TIME_KEY);
+        }));
+
+        this._settings.connect('changed::'+DOCK_FLOATING_DOCK_KEY, Lang.bind(this,function (){
+                  floating_dock = this._settings.get_boolean(DOCK_FLOATING_DOCK_KEY);
+                  Main.chrome._trackedActors[Main.chrome._findActor(this.actor)].affectsStruts=!floating_dock;
         }));
 
         let leave_event = this.actor.connect('leave-event', Lang.bind(this, this._hideDock));
@@ -810,6 +811,7 @@ DockIconMenu.prototype = {
 function main(extensionMeta) {
     imports.gettext.bindtextdomain('gnome-shell-extensions', extensionMeta.localedir);
 
-    let dock = new Dock();
+    //let 
+Main.dock = new Dock();
 }
 
