@@ -811,7 +811,6 @@ DockIconMenu.prototype = {
 function main(extensionMeta) {
     imports.gettext.bindtextdomain('gnome-shell-extensions', extensionMeta.localedir);
 
-    //let 
-Main.dock = new Dock();
+    let dock = new Dock();
 }
 
